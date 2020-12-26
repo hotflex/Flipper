@@ -33,29 +33,6 @@ return function()
 		expect(motor._complete).to.equal(true)
 	end)
 
-	it("should start when the goal is set", function()
-		local motor = GroupMotor.new({
-			A = 0,
-		}, false)
-
-		local bool = false
-		motor.onStart:connect(function()
-			bool = not bool
-		end)
-
-		motor:setGoal({
-			A = Instant.new(1),
-		})
-
-		expect(bool).to.equal(true)
-
-		motor:setGoal({
-			A = Instant.new(1),
-		})
-
-		expect(bool).to.equal(false)
-	end)
-
 	it("should properly return all values", function()
 		local motor = GroupMotor.new({
 			A = 1,
