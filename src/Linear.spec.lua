@@ -5,7 +5,9 @@ return function()
 	describe("completed state", function()
 		local motor = SingleMotor.new(0, false)
 
-		local goal = Linear.new(1, { velocity = 1 })
+		local goal = Linear.new(1, {
+			velocity = 1,
+		})
 		motor:setGoal(goal)
 	
 		for _ = 1, 60 do
@@ -24,7 +26,9 @@ return function()
 	describe("uncompleted state", function()
 		local motor = SingleMotor.new(0, false)
 
-		local goal = Linear.new(1, { velocity = 1 })
+		local goal = Linear.new(1, {
+			velocity = 1,
+		})
 		motor:setGoal(goal)
 	
 		for _ = 1, 59 do
@@ -39,7 +43,9 @@ return function()
 	describe("negative velocity", function()
 		local motor = SingleMotor.new(1, false)
 
-		local goal = Linear.new(0, { velocity = 1 })
+		local goal = Linear.new(0, {
+			velocity = 1,
+		})
 		motor:setGoal(goal)
 		
 		for _ = 1, 60 do

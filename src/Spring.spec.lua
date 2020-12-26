@@ -5,7 +5,10 @@ return function()
 	describe("completed state", function()
 		local motor = SingleMotor.new(0, false)
 
-		local goal = Spring.new(1, { frequency = 2, dampingRatio = 0.75 })
+		local goal = Spring.new(1, {
+			frequency = 2,
+			dampingRatio = 0.75,
+		})
 		motor:setGoal(goal)
 	
 		for _ = 1, 100 do
@@ -25,7 +28,10 @@ return function()
 		local motor = SingleMotor.new(0, false)
 		motor._state = { complete = false, value = 0, velocity = -5 }
 
-		local goal = Spring.new(1, { frequency = 2, dampingRatio = 1 })
+		local goal = Spring.new(1, {
+			frequency = 2,
+			dampingRatio = 1,
+		})
 
 		motor:setGoal(goal)
 		motor:step(1/60)

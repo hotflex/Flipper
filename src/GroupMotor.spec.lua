@@ -7,14 +7,17 @@ return function()
 	it("should complete when all child motors are complete", function()
 		local motor = GroupMotor.new({
 			A = 1,
-			B = 2
+			B = 2,
 		}, false)
 
 		expect(motor._complete).to.equal(true)
 
 		motor:setGoal({
 			A = Instant.new(3),
-			B = Spring.new(4, { frequency = 7.5, dampingRatio = 1 })
+			B = Spring.new(4, {
+				frequency = 7.5,
+				dampingRatio = 1,
+			}),
 		})
 
 		expect(motor._complete).to.equal(false)
@@ -41,13 +44,13 @@ return function()
 		end)
 
 		motor:setGoal({
-			A = Instant.new(1)
+			A = Instant.new(1),
 		})
 
 		expect(bool).to.equal(true)
 
 		motor:setGoal({
-			A = Instant.new(1)
+			A = Instant.new(1),
 		})
 
 		expect(bool).to.equal(false)
@@ -56,7 +59,7 @@ return function()
 	it("should properly return all values", function()
 		local motor = GroupMotor.new({
 			A = 1,
-			B = 2
+			B = 2,
 		}, false)
 
 		local value = motor:getValue()
