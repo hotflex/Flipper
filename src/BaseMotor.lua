@@ -10,7 +10,6 @@ BaseMotor.__index = BaseMotor
 function BaseMotor.new()
 	return setmetatable({
 		onStep = Signal.new(),
-		onStart = Signal.new(),
 		onComplete = Signal.new(),
 	}, BaseMotor)
 end
