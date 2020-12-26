@@ -35,11 +35,11 @@ return function()
 
 	it("should start when the goal is set", function()
 		local motor = GroupMotor.new({
-			A = 0
+			A = 0,
 		}, false)
 
 		local bool = false
-		motor:onStart(function()
+		motor.onStart:connect(function()
 			bool = not bool
 		end)
 

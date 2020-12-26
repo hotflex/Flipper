@@ -1,12 +1,21 @@
 local Connection = {}
 Connection.__index = Connection
 
-function Connection.new(signal, handler)
+function Connection.new(signal, handler, options)
 	return setmetatable({
 		signal = signal,
 		connected = true,
 		_handler = handler,
+		_options = options or {},
 	}, Connection)
+end
+
+function Connection:call(...)
+	if self._options.disconnectAfterCall then
+		self:disconnect()
+	end
+
+	self._handler(...)
 end
 
 function Connection:disconnect()
@@ -34,7 +43,7 @@ end
 
 function Signal:fire(...)
 	for _, connection in pairs(self._connections) do
-		connection._handler(...)
+		connection:call(...)
 	end
 
 	for _, thread in pairs(self._threads) do
@@ -44,10 +53,16 @@ function Signal:fire(...)
 	self._threads = {}
 end
 
-function Signal:connect(handler)
-	local connection = Connection.new(self, handler)
+function Signal:connect(handler, options)
+	local connection = Connection.new(self, handler, options)
 	table.insert(self._connections, connection)
 	return connection
+end
+
+function Signal:once(handler)
+	return self:connect(handler, {
+		disconnectAfterCall = true,
+	})
 end
 
 function Signal:wait()

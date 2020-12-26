@@ -33,6 +33,18 @@ return function()
 		expect(b).to.equal("hello")
 	end)
 
+	it("should disconnect after calling once when disconnectAfterCall is specified", function()
+		local signal = Signal.new()
+
+		local connection = signal:once(function() end)
+
+		expect(connection.connected).to.equal(true)
+
+		signal:fire()
+		
+		expect(connection.connected).to.equal(false)
+	end)
+
 	it("should properly handle disconnections", function()
 		local signal = Signal.new()
 

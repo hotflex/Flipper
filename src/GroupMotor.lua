@@ -59,7 +59,7 @@ function GroupMotor:step(deltaTime)
 		end
 	end
 
-	self._onStep:fire(self:getValue())
+	self.onStep:fire(self:getValue())
 
 	if allMotorsComplete then
 		if self._useImplicitConnections then
@@ -67,7 +67,7 @@ function GroupMotor:step(deltaTime)
 		end
 
 		self._complete = true
-		self._onComplete:fire()
+		self.onComplete:fire()
 	end
 
 	return allMotorsComplete
@@ -75,7 +75,7 @@ end
 
 function GroupMotor:setGoal(goals)
 	self._complete = false
-	self._onStart:fire()
+	self.onStart:fire()
 
 	for key, goal in pairs(goals) do
 		local motor = assert(self._motors[key], ("Unknown motor for key %s"):format(key))

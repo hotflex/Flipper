@@ -9,22 +9,10 @@ BaseMotor.__index = BaseMotor
 
 function BaseMotor.new()
 	return setmetatable({
-		_onStep = Signal.new(),
-		_onStart = Signal.new(),
-		_onComplete = Signal.new(),
+		onStep = Signal.new(),
+		onStart = Signal.new(),
+		onComplete = Signal.new(),
 	}, BaseMotor)
-end
-
-function BaseMotor:onStep(handler)
-	return self._onStep:connect(handler)
-end
-
-function BaseMotor:onStart(handler)
-	return self._onStart:connect(handler)
-end
-
-function BaseMotor:onComplete(handler)
-	return self._onComplete:connect(handler)
 end
 
 function BaseMotor:start()

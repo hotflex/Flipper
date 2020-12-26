@@ -16,7 +16,7 @@ return function()
 		local motor = SingleMotor.new(0, false)
 
 		local didComplete = false
-		motor:onComplete(function()
+		motor.onComplete:connect(function()
 			didComplete = true
 		end)
 
@@ -30,7 +30,7 @@ return function()
 		local motor = SingleMotor.new(0, false)
 
 		local bool = false
-		motor:onStart(function()
+		motor.onStart:connect(function()
 			bool = not bool
 		end)
 

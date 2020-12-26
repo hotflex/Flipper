@@ -29,11 +29,11 @@ local motor = Flipper.GroupMotor.new({
 	Y = 0
 })
 
-motor:onStep(function(values)
+motor.onStep:connect(function(values)
 	frame.Position = UDim2.new(0, values.X, 0, values.Y)
 end)
 
-motor:onComplete(function()
+motor.onComplete:connect(function()
 	print("Motor completed")
 end)
 

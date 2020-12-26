@@ -32,14 +32,14 @@ function SingleMotor:step(deltaTime)
 	local newState = self._goal:step(self._state, deltaTime)
 
 	self._state = newState
-	self._onStep:fire(newState.value)
+	self.onStep:fire(newState.value)
 
 	if newState.complete then
 		if self._useImplicitConnections then
 			self:stop()
 		end
 
-		self._onComplete:fire()
+		self.onComplete:fire()
 	end
 
 	return newState.complete
@@ -53,7 +53,7 @@ function SingleMotor:setGoal(goal)
 	self._state.complete = false
 	self._goal = goal
 
-	self._onStart:fire()
+	self.onStart:fire()
 
 	if self._useImplicitConnections then
 		self:start()
